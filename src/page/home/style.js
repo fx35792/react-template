@@ -97,3 +97,26 @@ export const RecommendItem = styled.div`
     background-size:contain;
 `;
 
+export const LoadMore = styled.div`
+    width:100%;
+    height:40px;
+    line-height:40px;
+    border-radius:20px;
+    background:#afafaf;
+    text-align:center;
+    color:#fff;
+    cursor:pointer;
+`;
+
+export const BackTop = styled.div`
+    position:fixed;
+    right:20px;
+    bottom:30px;
+    width:50px;
+    height:50px;
+    line-height:50px;
+    text-align:center;
+    cursor:pointer;
+    border:1px solid #ccc;
+`;
+

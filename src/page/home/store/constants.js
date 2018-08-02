@@ -1,1 +1,3 @@
-export const CHANGE_HOME_DATA = 'home/change_home_data';
+export const CHANGE_HOME_DATA = 'home/CHANGE_HOME_DATA';
+export const ADD_ARTICLE_LIST = 'home/ADD_ARTICLE_LIST';
+export const CHANGE_BACK_VISIBLE = '/home/CHANGE_BACK_VISIBLE';
