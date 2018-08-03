@@ -19,10 +19,9 @@ class Home extends PureComponent {
     }
 
     render() {
-
-
+        
         const {backVisible} = this.props;
-        console.log(backVisible);
+        // console.log(backVisible);
         return (
             <HomeWrapper>
                 <HomeLeft>

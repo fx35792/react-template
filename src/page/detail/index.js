@@ -1,31 +1,39 @@
 import React, {PureComponent} from 'react';
 import {connect} from 'react-redux';
+import {withRouter} from 'react-router-dom';
 import {
     DetailWrapper,
     Header,
     DetailContent
-} from './style'
+} from './style';
+
+import {actionCreators} from './store';
 
 class Detail extends PureComponent {
     render() {
-        const {content} = this.props;
+        const {title, content} = this.props;
         return (
             <DetailWrapper>
-                <Header>姥姥进贾府11：为什么凤姐当着刘姥姥跟贾蓉调情？</Header>
-                <DetailContent>
-                    {content}
-                </DetailContent>
+                <Header>{title}</Header>
+                <DetailContent dangerouslySetInnerHTML={{__html: content}}/>
             </DetailWrapper>
         )
     }
 
     componentDidMount() {
-
+        this.props.getDetail(this.props.match.params.id)
     };
 }
 
 const mapState = (state) => ({
+    title: state.getIn(['detail', 'title']),
     content: state.getIn(['detail', 'content'])
 });
 
-export default connect(mapState, null)(Detail);
+const mapDispatch = (dispatch) => ({
+    getDetail(id) {
+        dispatch(actionCreators.getDetailData(id))
+    }
+});
+
+export default connect(mapState, mapDispatch)(withRouter(Detail));

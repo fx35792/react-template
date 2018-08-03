@@ -10,7 +10,7 @@ class List extends PureComponent {
         return (
             <ListWrapper>
                 {list.map((value, index) => (
-                    <Link to="/detail" key={index}>
+                    <Link to={'/detail/' + value.get('id')} key={index}>
                         <ListItem>
                             <img
                                 className="list-img"

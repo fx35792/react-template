@@ -15,13 +15,15 @@ export const Header = styled.div`
 `;
 
 export const DetailContent = styled.div`
+    margin:30px 0;
     p{
         margin: 0 0 25px;
         color: #2f2f2f;
-        font-size:14px;
-        line-height:25px;
+        font-size:16px;
+        line-height:30px;
     }
     img{
         width:100%;
+        margin-bottom:20px;
     }
 `;

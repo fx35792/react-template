@@ -5,6 +5,8 @@ export const WrapperHeader = styled.div`
     position:relative;
     height:56px;
     border-bottom:1px solid #f0f0f0;
+    z-index:1;
+    background:#fff;
 `;
 
 export const Logo = styled.div`
@@ -163,7 +165,7 @@ export const Addition = styled.div`
     right:0;
 `;
 
-export const Button = styled.a`
+export const Button = styled.div`
     float:right;
     width: 80px;
     height: 38px;

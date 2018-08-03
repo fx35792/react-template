@@ -18,9 +18,11 @@ import {
 } from './style';
 
 import {actionCreators} from './store';
+import {actionCreators as loginActionCreators} from '../../page/login/store';
 
 class Header extends Component {
     getListArea = () => {
+
         const {focused, mouseIn, list, page, totalPage, handleMouseEnter, handleMouseLeave, handleChangePage} = this.props;
 
         const newList = list.toJS();
@@ -58,14 +60,16 @@ class Header extends Component {
     };
 
     render() {
-        const {focused, list, handleInputFocus, handleInputBlur,} = this.props;
+        const {focused, list, handleInputFocus, handleInputBlur, login} = this.props;
         return (
             <WrapperHeader>
                 <Link to='/'>
                     <Logo/>
                 </Link>
                 <Nav>
-                    <NavItem className="left active">首页</NavItem>
+                    <Link to='/'>
+                        <NavItem className="left active">首页</NavItem>
+                    </Link>
                     <NavItem className="left">下载App</NavItem>
                     <SearchWrapper>
                         <CSSTransition
@@ -84,13 +88,20 @@ class Header extends Component {
                     <NavItem className="right">
                         <i className="iconfont Aa">&#xe636;</i>
                     </NavItem>
-                    <NavItem className="right">登录</NavItem>
+
+                    {login ? <NavItem onClick={this.props.handleLogout} className="right">退出</NavItem> :
+                        <Link to='/login'>
+                            <NavItem className="right">登录</NavItem>
+                        </Link>
+                    }
                 </Nav>
                 <Addition>
-                    <Button className="writing">
-                        <i className="iconfont">&#xe62b;</i>
-                        写文章
-                    </Button>
+                    <Link to='/writer'>
+                        <Button className="writing">
+                            <i className="iconfont">&#xe62b;</i>
+                            写文章
+                        </Button>
+                    </Link>
                     <Button className="reg">注册</Button>
                 </Addition>
             </WrapperHeader>
@@ -106,7 +117,7 @@ const mapStateToProps = (state) => {
         page: state.getIn(['header', 'page']),
         totalPage: state.getIn(['header', 'totalPage']),
         mouseIn: state.getIn(['header', 'mouseIn']),
-        // focused: state.get('header').get('focused')//第二种写法
+        login: state.getIn(['login', 'login'])
         // focused: state.header.get('focused')//没设置immutable的写法
     }
 };
@@ -114,7 +125,6 @@ const mapStateToProps = (state) => {
 const mapDispatchToProps = (dispatch) => {
     return {
         handleInputFocus(list) {
-            // console.log(list);
             (list.size === 0) && dispatch(actionCreators.getList());
             dispatch(actionCreators.getInputFocus());
         },
@@ -128,9 +138,7 @@ const mapDispatchToProps = (dispatch) => {
             dispatch(actionCreators.getMouseLeave());
         },
         handleChangePage(page, totalPage, spin) {
-            // console.log(page, totalPage);
             let originAngle = spin.style.transform.replace(/[^0-9]/ig, '');
-            // console.log(originAngle);
 
             if (originAngle) {
                 originAngle = parseInt(originAngle, 10)
@@ -144,6 +152,9 @@ const mapDispatchToProps = (dispatch) => {
             } else {
                 dispatch(actionCreators.changePage(1));
             }
+        },
+        handleLogout() {
+            dispatch(loginActionCreators.logout());
         }
     }
 };
